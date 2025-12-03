@@ -1,8 +1,5 @@
-streamlit
-pandas
-numpy
-plotly
-openpyxl
-scipy
-tkinter
-tqdm
+uvicorn[standard]
+fastapi
+pydantic
+pymysql
+sqlalchemy

@@ -1,0 +1,15 @@
+from fastapi import FastAPI
+from app.api.db_test_connect_router import router as db_test_connect_router
+
+app = FastAPI()
+
+# FastAPI에서 하나의 엔드포인트(API URL)를 만드는 방법
+# @app.get("/")  # 데코레이터, '/'주소로 들어오는 GET 요청을 처리
+# def root():
+#     return {"message": "FastAPI running!"}
+
+# 라우터 등록
+app.include_router(db_test_connect_router)
+
+# 실행: uvicorn testmain:app --reload
+# 가상환경 : venv\Scripts\activate.bat (Windows)

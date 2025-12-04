@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.api.db_test_connect_router_complex import router as db_test_connect_router_complex
 from app.api.db_test_connect_router import router as db_test_connect_router
 
 app = FastAPI()
@@ -10,6 +11,11 @@ app = FastAPI()
 
 # 라우터 등록
 app.include_router(db_test_connect_router)
+app.include_router(
+    db_test_connect_router_complex,
+    prefix="/complex",     # 선택사항: 엔드포인트 앞에 접두사 붙이기
+    tags=["Complex Test"]  # Docs용
+)
 
 # 실행: uvicorn main:app --reload
 # 가상환경 : .\venv\Scripts\Activate.ps1 (Windows)

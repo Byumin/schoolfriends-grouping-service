@@ -18,4 +18,4 @@ class schema_TestJoinSchoolClassResponse(BaseModel):
     member_no: str
     psy_code: str
     psy_name: str
-    end_date: date
+    end_date: str

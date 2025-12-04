@@ -11,5 +11,5 @@ app = FastAPI()
 # 라우터 등록
 app.include_router(db_test_connect_router)
 
-# 실행: uvicorn testmain:app --reload
-# 가상환경 : venv\Scripts\activate.bat (Windows)
+# 실행: uvicorn main:app --reload
+# 가상환경 : .\venv\Scripts\Activate.ps1 (Windows)

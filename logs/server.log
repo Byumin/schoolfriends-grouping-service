@@ -1,0 +1,726 @@
+[2025-12-05 16:55:40] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 16:55:40] [ERROR] [main.py:17] 서버 내부 치명적 오류: module 'app.dao.crud' has no attribute 'select_list'
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 385, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 286, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\anyio\to_thread.py", line 61, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2525, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\controller\router_db_test_connect.py", line 19, in get_list
+    return service.school_class_get_list(db, search)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\services\service.py", line 12, in school_class_get_list
+    return crud.select_list(db, search)
+           ^^^^^^^^^^^^^^^^
+AttributeError: module 'app.dao.crud' has no attribute 'select_list'
+[2025-12-05 16:59:18] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 16:59:18] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 16:59:18] [ERROR] [crud.py:24] 전체 조회 중 DB 에러 발생
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 1414, in _init_compiled
+    compiled.construct_params(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        extracted_parameters=extracted_parameters,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1911, in construct_params
+    raise exc.InvalidRequestError(
+    ...<3 lines>...
+    )
+sqlalchemy.exc.InvalidRequestError: A value is required for bind parameter 'condition_school_code' (Background on this error at: https://sqlalche.me/e/20/cd3x)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\dao\crud.py", line 17, in crud_select
+    result = db.execute(text(raw_sql.SCHOOL_CLASS_SELECT_ALL), params).all() # SQL 실행 및 결과 받기
+             ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2258, in _execute_internal
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 1414, in _init_compiled
+    compiled.construct_params(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        extracted_parameters=extracted_parameters,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1911, in construct_params
+    raise exc.InvalidRequestError(
+    ...<3 lines>...
+    )
+sqlalchemy.exc.StatementError: (sqlalchemy.exc.InvalidRequestError) A value is required for bind parameter 'condition_school_code'
+[SQL: 
+    SELECT
+        A.SCHOOL_CODE AS school_code,
+        A.SCHOOL_NAME AS school_name,
+        B.CLASS_CODE AS class_code,
+        B.SCHOOL_GRADE AS school_grade,
+        B.SCHOOL_NUM AS school_num
+    FROM SCHOOL_INFO A
+    INNER JOIN SCHOOL_CLASS B
+    ON A.SCHOOL_CODE = B.SCHOOL_CODE
+    WHERE A.SCHOOL_CODE = %(condition_school_code)s
+    AND B.CLASS_CODE = %(condition_class_code)s
+]
+[parameters: [{'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}]]
+(Background on this error at: https://sqlalche.me/e/20/cd3x)
+[2025-12-05 16:59:18] [ERROR] [main.py:17] 서버 내부 치명적 오류: (sqlalchemy.exc.InvalidRequestError) A value is required for bind parameter 'condition_school_code'
+[SQL: 
+    SELECT
+        A.SCHOOL_CODE AS school_code,
+        A.SCHOOL_NAME AS school_name,
+        B.CLASS_CODE AS class_code,
+        B.SCHOOL_GRADE AS school_grade,
+        B.SCHOOL_NUM AS school_num
+    FROM SCHOOL_INFO A
+    INNER JOIN SCHOOL_CLASS B
+    ON A.SCHOOL_CODE = B.SCHOOL_CODE
+    WHERE A.SCHOOL_CODE = %(condition_school_code)s
+    AND B.CLASS_CODE = %(condition_class_code)s
+]
+[parameters: [{'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}]]
+(Background on this error at: https://sqlalche.me/e/20/cd3x)
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 1414, in _init_compiled
+    compiled.construct_params(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        extracted_parameters=extracted_parameters,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1911, in construct_params
+    raise exc.InvalidRequestError(
+    ...<3 lines>...
+    )
+sqlalchemy.exc.InvalidRequestError: A value is required for bind parameter 'condition_school_code' (Background on this error at: https://sqlalche.me/e/20/cd3x)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 385, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 286, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\anyio\to_thread.py", line 61, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2525, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\controller\router_db_test_connect.py", line 19, in get_list
+    return service.school_class_get_list(db, search)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\services\service.py", line 12, in school_class_get_list
+    return crud.crud_select(db, search)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\dao\crud.py", line 25, in crud_select
+    raise e # 서비스로 에러 던지기
+    ^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\app\dao\crud.py", line 17, in crud_select
+    result = db.execute(text(raw_sql.SCHOOL_CLASS_SELECT_ALL), params).all() # SQL 실행 및 결과 받기
+             ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2258, in _execute_internal
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1821, in _execute_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str(statement), parameters, None, None
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1815, in _execute_context
+    context = constructor(
+        dialect, self, conn, execution_options, *args, **kw
+    )
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 1414, in _init_compiled
+    compiled.construct_params(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        extracted_parameters=extracted_parameters,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1911, in construct_params
+    raise exc.InvalidRequestError(
+    ...<3 lines>...
+    )
+sqlalchemy.exc.StatementError: (sqlalchemy.exc.InvalidRequestError) A value is required for bind parameter 'condition_school_code'
+[SQL: 
+    SELECT
+        A.SCHOOL_CODE AS school_code,
+        A.SCHOOL_NAME AS school_name,
+        B.CLASS_CODE AS class_code,
+        B.SCHOOL_GRADE AS school_grade,
+        B.SCHOOL_NUM AS school_num
+    FROM SCHOOL_INFO A
+    INNER JOIN SCHOOL_CLASS B
+    ON A.SCHOOL_CODE = B.SCHOOL_CODE
+    WHERE A.SCHOOL_CODE = %(condition_school_code)s
+    AND B.CLASS_CODE = %(condition_class_code)s
+]
+[parameters: [{'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}]]
+(Background on this error at: https://sqlalche.me/e/20/cd3x)
+[2025-12-05 17:04:51] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:04:51] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:04:51] [ERROR] [main.py:17] 서버 내부 치명적 오류: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:05:15] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:05:15] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:05:15] [ERROR] [main.py:17] 서버 내부 치명적 오류: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:07:00] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:07:00] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:07:00] [ERROR] [main.py:17] 서버 내부 치명적 오류: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:07:22] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:07:22] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:07:22] [ERROR] [main.py:17] 서버 내부 치명적 오류: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:09:30] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:09:30] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:09:30] [ERROR] [main.py:17] 서버 내부 치명적 오류: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:10:48] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:10:48] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:10:48] [ERROR] [main.py:17] 서버 내부 치명적 오류: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'member_no'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'psy_name'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+  {'type': 'missing', 'loc': ('response', 0, 'end_date'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:11:48] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:11:48] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:11:48] [ERROR] [main.py:17] 서버 내부 치명적 오류: 1 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 1 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:12:27] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:12:27] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:12:27] [ERROR] [main.py:17] 서버 내부 치명적 오류: 1 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+Traceback (most recent call last):
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 407, in app
+    content = await serialize_response(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\user\workspace\schoolfriends-grouping-service\venv\Lib\site-packages\fastapi\routing.py", line 248, in serialize_response
+    raise ResponseValidationError(
+        errors=_normalize_errors(errors), body=response_content
+    )
+fastapi.exceptions.ResponseValidationError: 1 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'psy_code'), 'msg': 'Field required', 'input': {'school_code': 'AD0001', 'school_name': '학지중학교', 'class_code': 'AD00012025101F03E', 'school_grade': '1', 'school_num': '1'}}
+
+[2025-12-05 17:15:13] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:15:13] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025101F03E'}
+[2025-12-05 17:21:37] [INFO] [service.py:11] 리스트 조회 서비스 시작
+[2025-12-05 17:21:37] [DEBUG] [crud.py:15] 전달할 파라미터: {'school_code': 'AD0001', 'class_code': 'AD00012025115D1E4'}
